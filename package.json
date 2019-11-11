@@ -1,0 +1,18 @@
+{
+  "name": "@fh-potsdam/ct-interactive",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.18.4",
+    "reload": "^3.0.3"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "start": "echo \"running on http://localhost:3000\" && reload --dir ./packages/  --browser --port 3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
