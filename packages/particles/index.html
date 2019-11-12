@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Assignment CT Interactive Particles</title>
+    <title>Page Title</title>
     <meta name="description" content="something" />
     <meta name="author" content="me" />
     <style>
@@ -14,6 +14,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+
         height: 100vh;
         height: calc(var(--vh, 1vh) * 100);
         width: 100vw;
@@ -40,6 +41,47 @@
         // Then we set the value in the --vh custom property to the root of the document
         document.documentElement.style.setProperty("--vh", `${vh}px`);
       });
+    </script>
+    <script>
+      async function readImageData() {
+        const response = await fetch("./images/images.json", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        return await response.json();
+      }
+      document.body.style = `
+      flex-direction: row;
+      justify-content: none;
+      align-items: flex-start;
+      height:100%;
+      padding-top:1em;`;
+      const imageContainer = document.createElement('div');
+      imageContainer.style = `
+      display: flex;
+      flex-direction: column;
+      padding-left: 1em;
+      `
+      readImageData().then(json =>{
+        console.log(json);
+        json.images.forEach(element => {
+          const container = document.createElement('div');
+          const underline = document.createElement('p');
+          const img = document.createElement('img');
+          img.src = `./images/${element.name}`;
+          img.width = 500;
+          img.height = 500;
+          underline.innerText  = element.title;
+          container.appendChild(img);
+          container.appendChild(underline);
+          imageContainer.appendChild(container);
+        });
+        document.body.appendChild(imageContainer);
+      }).catch(err=>{
+        console.error(err);
+      })
     </script>
   </body>
 </html>
